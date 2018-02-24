@@ -9,8 +9,8 @@ describe('Create grid', () => {
 
         expect(grid).toEqual(jasmine.any(Grid));
         expect(grid).toEqual(jasmine.objectContaining({
-            x: x,
-            y: y
+            x,
+            y
         }));
     });
 
