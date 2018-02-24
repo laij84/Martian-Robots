@@ -261,6 +261,27 @@ var Command = function () {
                     break;
             }
         }
+
+        /**
+         * @param {function} function to be added
+         * @param {string} name of command to be used as object key
+         */
+
+    }, {
+        key: 'addCommand',
+        value: function addCommand(command, commandName) {
+            // validate command
+            switch (true) {
+                case typeof command !== 'function':
+                    throw new Error('Command must be a function.');
+                    break;
+                case typeof commandName !== 'string':
+                    throw new Error('Command name must be a string.');
+                    break;
+            }
+            // assign new static method
+            this[commandName] = command;
+        }
     }]);
 
     return Command;

@@ -52,4 +52,13 @@ describe('Commands robot', () => {
         expect(robot.x).toEqual(robot.x++);
     });
 
+    it('Should be able to add a new command to the class', ()=> {
+        let sayHello = function(string) {
+            return `Hello ${string}!`
+        }
+
+        Command.addCommand(sayHello, 'sayHello');
+
+        expect(Command.sayHello('Bob')).toEqual('Hello Bob!');
+    });
 });
