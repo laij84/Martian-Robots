@@ -1,5 +1,6 @@
-console.log("js loaded");
+const Grid = require('./components/Grid');
 
+window.Grid = Grid;
 // Requirements
 
 //  1. user can create Grid
