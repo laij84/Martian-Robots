@@ -3,8 +3,8 @@ describe('Create grid', () => {
     let grid;
 
     it('Creates a grid with properties x and y', ()=> {
-        let x = 3;
-        let y = 5;
+        let x = 5;
+        let y = 3;
         let grid = new Grid(x,y);
 
         expect(grid).toEqual(jasmine.any(Grid));
