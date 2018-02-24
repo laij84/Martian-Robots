@@ -13,4 +13,22 @@ describe('Create grid', () => {
             y: y
         }));
     });
+
+    it('Should throw error if x and or y is greater than 50', ()=> {
+        let x = 51;
+        let y = 24;
+
+        expect(function(){
+            return new Grid(x,y);
+        }).toThrowError();
+    });
+
+    it('Should throw error if x and or y is not an integer', ()=> {
+        let x = 5.23;
+        let y = 'bob';
+
+        expect(function(){
+            return new Grid(x,y);
+        }).toThrowError();
+    });
 });
