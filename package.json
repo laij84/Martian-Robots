@@ -21,6 +21,7 @@
   "homepage": "https://github.com/laij84/Martian-Robots#readme",
   "devDependencies": {
     "cross-env": "^5.1.3",
+    "jasmine": "^3.0.0",
     "laravel-mix": "^2.0.0"
   }
 }
