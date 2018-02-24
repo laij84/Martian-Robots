@@ -65,8 +65,14 @@ describe('Create a robot', () => {
 
     it('Should be able to process a string of commands and return its X Y position and orientation', () => {
         let commands = 'RFRFRFRF';
-
         expect(robot.processCommands(commands)).toEqual('1 1 E');
+    });
+
+    it('Should be able report its last known position when lost', () => {
+        let robot2 = new Robot(3, 2, 'N', grid);
+
+        let commands = 'FRRFLLFFRRFLL';
+        expect(robot2.processCommands(commands)).toEqual('3 3 N LOST');
     });
 
 });

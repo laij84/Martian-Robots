@@ -31,6 +31,7 @@ class Robot {
                 this.orientation = orientation.toUpperCase();
                 this.lost = false;
                 this.grid = grid;
+                this.prevLocation = [];
         }
     }
 
@@ -52,7 +53,21 @@ class Robot {
         console.log(commandsArray);
         //Loop over arrays
         for (var i = 0; i < commandsArray.length; i++) {
-            Command[commandsArray[i]](this);
+
+            if (!this.lost) {
+                // store the last known position
+                this.prevLocation = [this.x, this.y, this.orientation];
+
+                Command[commandsArray[i]](this);
+            }
+
+            // after moving, check if robot is lost, and update state, report last known position
+            if(this.isLost()) {
+                this.lost = true;
+                return `${this.prevLocation[0]} ${this.prevLocation[1]} ${this.prevLocation[2]} LOST`
+            } 
+
+            
         }
 
         return `${this.x} ${this.y} ${this.orientation}`
