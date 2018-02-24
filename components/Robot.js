@@ -1,4 +1,5 @@
 const Grid = require('./Grid');
+const Command = require('./Command');
 
 /**
  * Represents a Robot.
@@ -40,6 +41,23 @@ class Robot {
     isLost() {
         return (this.x < 0 || this.x > this.grid.x || this.y < 0 || this.y > this.grid.y);
     }
+
+    /**
+     * Process commands given
+     * @return {String} X Y position or if LOST
+     */
+    processCommands(commands) {
+        //spread into array
+        const commandsArray = [...commands.toUpperCase()];
+        console.log(commandsArray);
+        //Loop over arrays
+        for (var i = 0; i < commandsArray.length; i++) {
+            Command[commandsArray[i]](this);
+        }
+
+        return `${this.x} ${this.y} ${this.orientation}`
+    }
+
 }
 
 module.exports = Robot;

@@ -63,4 +63,10 @@ describe('Create a robot', () => {
         expect(robot.isLost()).toEqual(false);
     });
 
+    it('Should be able to process a string of commands and return its X Y position and orientation', () => {
+        let commands = 'RFRFRFRF';
+
+        expect(robot.processCommands(commands)).toEqual('1 1 E');
+    });
+
 });

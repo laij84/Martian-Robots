@@ -132,6 +132,10 @@ window.Command = Command;
 /* 3 */
 /***/ (function(module, exports, __webpack_require__) {
 
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 var Grid = __webpack_require__(0);
@@ -145,31 +149,71 @@ var Grid = __webpack_require__(0);
  * @param {object} instance of grid robot is placed on
  */
 
-var Robot = function Robot(x, y, orientation, grid) {
-    _classCallCheck(this, Robot);
+var Robot = function () {
+    function Robot(x, y, orientation, grid) {
+        _classCallCheck(this, Robot);
 
-    // validate constructor params
-    switch (true) {
-        case !Number.isInteger(x) || !Number.isInteger(y):
-            throw new Error('The coordinates provided must both be numbers');
-            break;
-        case ['N', 'S', 'E', 'W'].indexOf(orientation.toUpperCase()) === -1:
-            throw new Error('Invalid orientation. Valid orientations are N S E or W');
-            break;
-        case !(grid instanceof Grid):
-            throw new Error('Invalid grid.');
-            break;
-        case x < 0 || x > grid.x || y < 0 || y > grid.y:
-            throw new Error('The coordinates provided are not on the grid.');
-            break;
-        default:
-            this.x = x;
-            this.y = y;
-            this.orientation = orientation.toUpperCase();
-            this.lost = false;
-            this.grid = grid;
+        // validate constructor params
+        switch (true) {
+            case !Number.isInteger(x) || !Number.isInteger(y):
+                throw new Error('The coordinates provided must both be numbers');
+                break;
+            case ['N', 'S', 'E', 'W'].indexOf(orientation.toUpperCase()) === -1:
+                throw new Error('Invalid orientation. Valid orientations are N S E or W');
+                break;
+            case !(grid instanceof Grid):
+                throw new Error('Invalid grid.');
+                break;
+            case x < 0 || x > grid.x || y < 0 || y > grid.y:
+                throw new Error('The coordinates provided are not on the grid.');
+                break;
+            default:
+                this.x = x;
+                this.y = y;
+                this.orientation = orientation.toUpperCase();
+                this.lost = false;
+                this.grid = grid;
+        }
     }
-};
+
+    /**
+     * check if robot is lost
+     * @return {Boolean}
+     */
+
+
+    _createClass(Robot, [{
+        key: 'isLost',
+        value: function isLost() {
+            return this.x < 0 || this.x > this.grid.x || this.y < 0 || this.y > this.grid.y;
+        }
+
+        /**
+         * Process commands given
+         * @return {String} X Y position or if LOST
+         */
+
+    }, {
+        key: 'processCommands',
+        value: function processCommands(commands) {
+            //spread into array
+            var commandsArray = [].concat(_toConsumableArray(commands.toUpperCase()));
+            console.log(commandsArray);
+            //Loop over arrays
+            for (var i = 0; i < commandsArray.length; i++) {
+                // if the robot is is not lost, process command
+
+                console.log(i);
+                Command[commandsArray[i]](this);
+                console.log(commandsArray[i]);
+            }
+
+            return this.x + ' ' + this.y + ' ' + this.orientation;
+        }
+    }]);
+
+    return Robot;
+}();
 
 module.exports = Robot;
 
