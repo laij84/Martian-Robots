@@ -1,4 +1,4 @@
-describe('Create grid', () => {
+describe('Commands robot', () => {
     const Robot = require('../components/Robot');
     const Grid = require('../components/Grid');
     const Command = require('../components/Command');
@@ -19,7 +19,7 @@ describe('Create grid', () => {
         robot = new Robot(robotX,robotY,orientation,grid);
      });
 
-    it('Command robot to turn right', ()=> {
+    it('Commands robot to turn right', ()=> {
         Command.R(robot);
         expect(robot.orientation).toEqual('S');
 
@@ -31,6 +31,25 @@ describe('Create grid', () => {
 
         Command.R(robot);
         expect(robot.orientation).toEqual('E');
+    });
+
+    it('Commands robot to turn left', ()=> {
+        Command.L(robot);
+        expect(robot.orientation).toEqual('N');
+
+        Command.L(robot);
+        expect(robot.orientation).toEqual('W');
+
+        Command.L(robot);
+        expect(robot.orientation).toEqual('S');
+
+        Command.L(robot);
+        expect(robot.orientation).toEqual('E');
+    });
+
+    it('Commands robot to move forward', ()=> {
+        Command.F(robot);
+        expect(robot.x).toEqual(robot.x++);
     });
 
 });
