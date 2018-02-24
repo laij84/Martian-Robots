@@ -75,8 +75,10 @@ module.exports = __webpack_require__(1);
 /***/ (function(module, exports, __webpack_require__) {
 
 var Grid = __webpack_require__(2);
+var Robot = __webpack_require__(3);
 
 window.Grid = Grid;
+window.Robot = Robot;
 // Requirements
 
 //  1. user can create Grid
@@ -99,14 +101,48 @@ window.Grid = Grid;
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
+/**
+ * Represents a Grid.
+ * @constructor
+ * @param {integer} x coordinate
+ * @param {integer} y coordinate
+ */
 var Grid = function Grid(x, y) {
     _classCallCheck(this, Grid);
 
-    this.x = x;
-    this.y = y;
+    // validate grid coords
+    switch (true) {
+        case !Number.isInteger(x) || !Number.isInteger(y):
+            throw new Error('The coordinates provided must both be integers');
+            break;
+        case x > 50 || y > 50:
+            throw new Error('The coordinates provided exceed the maximum');
+            break;
+        default:
+            this.x = x;
+            this.y = y;
+    }
 };
 
 module.exports = Grid;
+
+/***/ }),
+/* 3 */
+/***/ (function(module, exports) {
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var Robot = function Robot(x, y, orientation, grid) {
+    _classCallCheck(this, Robot);
+
+    this.x = x;
+    this.y = y;
+    this.orientation = orientation;
+    this.lost = false;
+    this.grid = grid;
+};
+
+module.exports = Robot;
 
 /***/ })
 /******/ ]);

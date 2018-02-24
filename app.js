@@ -1,6 +1,8 @@
 const Grid = require('./components/Grid');
+const Robot = require('./components/Robot');
 
 window.Grid = Grid;
+window.Robot = Robot;
 // Requirements
 
 //  1. user can create Grid
