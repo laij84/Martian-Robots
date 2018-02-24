@@ -1,5 +1,13 @@
 const Grid = require('./Grid');
 
+/**
+ * Represents a Robot.
+ * @constructor
+ * @param {integer} robot x coordinate
+ * @param {integer} robot y coordinate
+ * @param {string} direction robot is facing
+ * @param {object} instance of grid robot is placed on
+ */
 class Robot {
     constructor(x, y, orientation, grid) {
         // validate constructor params
