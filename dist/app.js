@@ -107,9 +107,11 @@ module.exports = __webpack_require__(2);
 
 var Grid = __webpack_require__(0);
 var Robot = __webpack_require__(3);
+var Command = __webpack_require__(4);
 
 window.Grid = Grid;
 window.Robot = Robot;
+window.Command = Command;
 // Requirements
 
 //  1. user can create Grid
@@ -133,6 +135,15 @@ window.Robot = Robot;
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 var Grid = __webpack_require__(0);
+
+/**
+ * Represents a Robot.
+ * @constructor
+ * @param {integer} robot x coordinate
+ * @param {integer} robot y coordinate
+ * @param {string} direction robot is facing
+ * @param {object} instance of grid robot is placed on
+ */
 
 var Robot = function Robot(x, y, orientation, grid) {
     _classCallCheck(this, Robot);
@@ -161,6 +172,101 @@ var Robot = function Robot(x, y, orientation, grid) {
 };
 
 module.exports = Robot;
+
+/***/ }),
+/* 4 */
+/***/ (function(module, exports) {
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+/**
+ * Class stores all commands for the robot
+ * Use static methods as the class can control multiple robots. Multiple instances of class not required. 
+ */
+var Command = function () {
+    function Command() {
+        _classCallCheck(this, Command);
+    }
+
+    /**
+     * @param {object} Instance of robot
+     */
+
+
+    _createClass(Command, null, [{
+        key: 'R',
+        value: function R(robot) {
+            // Check orientation of robot and change its orientation accordingly.
+            switch (robot.orientation) {
+                case 'N':
+                    robot.orientation = 'E';
+                    break;
+                case 'E':
+                    robot.orientation = 'S';
+                    break;
+                case 'S':
+                    robot.orientation = 'W';
+                    break;
+                case 'W':
+                    robot.orientation = 'N';
+                    break;
+            }
+        }
+
+        /**
+         * @param {object} Instance of robot
+         */
+
+    }, {
+        key: 'L',
+        value: function L(robot) {
+            // Check orientation of robot and change its orientation accordingly.
+            switch (robot.orientation) {
+                case 'N':
+                    robot.orientation = 'W';
+                    break;
+                case 'E':
+                    robot.orientation = 'N';
+                    break;
+                case 'S':
+                    robot.orientation = 'E';
+                    break;
+                case 'W':
+                    robot.orientation = 'S';
+                    break;
+            }
+        }
+
+        /**
+         * @param {object} Instance of robot
+         */
+
+    }, {
+        key: 'F',
+        value: function F(robot) {
+            switch (true) {
+                case robot.orientation === 'N':
+                    robot.y++;
+                    break;
+                case robot.orientation === 'E':
+                    robot.x++;
+                    break;
+                case robot.orientation === 'S':
+                    robot.y--;
+                    break;
+                case robot.orientation === 'W':
+                    robot.x--;
+                    break;
+            }
+        }
+    }]);
+
+    return Command;
+}();
+
+module.exports = Command;
 
 /***/ })
 /******/ ]);

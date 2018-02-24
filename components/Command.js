@@ -67,6 +67,7 @@ class Command {
             break;
         }
     }
-
 }
+
+module.exports = Command;
 
