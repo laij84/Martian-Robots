@@ -1,6 +1,7 @@
 describe('Create a robot', () => {
     const Robot = require('../components/Robot');
     const Grid = require('../components/Grid');
+    const Command = require('../components/Command');
 
     // variables to construct grid and robot
     let gridX = 5;
@@ -56,6 +57,10 @@ describe('Create a robot', () => {
         expect(function(){
             return new Robot(outsideX, outsideY, orientation, grid);
         }).toThrowError();
+    });
+
+    it('Should check if the robot is lost', () => {
+        expect(robot.isLost()).toEqual(false);
     });
 
 });

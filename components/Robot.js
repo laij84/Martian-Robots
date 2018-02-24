@@ -32,6 +32,14 @@ class Robot {
                 this.grid = grid;
         }
     }
+
+    /**
+     * check if robot is lost
+     * @return {Boolean}
+     */
+    isLost() {
+        return (this.x < 0 || this.x > this.grid.x || this.y < 0 || this.y > this.grid.y);
+    }
 }
 
 module.exports = Robot;
