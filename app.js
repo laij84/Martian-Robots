@@ -26,8 +26,8 @@ rl.prompt();
 rl.on('line', (input) => {
     switch(true) {
         case !grid:
-            // parse string and remove whitespaces        
-            let sizes = input.split(' ');
+            // split string at spaces       
+            let sizes = input.trim().split(' ');
 
             try {
                 //Create grid with input
@@ -43,7 +43,7 @@ rl.on('line', (input) => {
             }
             break;
         case !robot:
-            let robotInfo = input.split(' ');
+            let robotInfo = input.trim().split(' ');
 
             try {
                 //Create grid with input
