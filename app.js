@@ -7,7 +7,6 @@ let grid;
 let robot;
 let commands;
 
-
 const rl = readline.createInterface({
   input: process.stdin,
   output: process.stdout
@@ -17,7 +16,7 @@ const prompts = {
     getGrid: "Enter the width and height (e.g. '5 3') of the grid: \n",
     getRobot: "Enter the position(x y coords) and orientation (N S E W) of the robot (e.g. 1 1 E): \n",
     getCommands: "Enter a string of commands ('R' right, 'L' left, 'F' forward) to move the robot (e.g. 'RFRFRFRF'): \n",
-    addRobot: 'Do you want to move another robot? (y/n)'
+    addRobot: 'Do you want to move another robot? (y/n): \n'
 }
 
 // Activate starting question
@@ -43,7 +42,6 @@ rl.on('line', (input) => {
                 rl.prompt();
             }
             break;
-
         case !robot:
             let robotInfo = input.split(' ');
 
