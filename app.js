@@ -68,6 +68,7 @@ rl.on('line', (input) => {
             }
             catch(error) {
                 console.log(error.message);
+                // prompt again if error
                 rl.prompt();
             }
             break;

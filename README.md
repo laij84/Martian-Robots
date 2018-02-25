@@ -1,6 +1,49 @@
 #Martian-Robots
+
+##Installation
+To setup this application, clone the repository and run:
+
+```
+npm install
+```
+
+To run the application, cd into the root directory run:
+
+```
+node app.js
+```
+You will then go through a series of prompts to create the grid and command the robot.
+
+To execute tests, you can run from the root directory:
+
+```
+jasmine
+```
+or to run a specific test file:
+
+```
+jasmine spec/[filename]
+```
+
+##The Solution
+###About
+I used an object oriented programming approach to solve this challenge, using ES6 JavaScript Classes to construct instances of the grid and robots. 
+
+I also used a class to store the command logic, I felt this should be separate from the Robot class to allow new commands to be added which could then be used on all instances of Robot. 
+
+The command class also only contains static methods - I did not think it was necessary to construct multiple instances of Command to control the robots. 
+
+###Improvements / Next Steps
+Overall I think I reached most of the criteria outlined by the challenge. The only thing I would add is better validation for the processing commands logic on the Robot. 
+
+Currently when instructing a robot to move the method only checks for the valid commands (R L F), but if new commands were added then this would not work. 
+
+I would approach this solution by iterating over the properties of the class to get an array of the commands, and then when validating check against this to see if the command is exists. 
+
+
+
 ##Problem: Martian Robots 
-### The  Problem 
+### The Problem 
 The surface of Mars can be modelled by a rectangular grid around which robots are able to move according to instructions provided from Earth. You are to write a program that determines each sequence of robot positions and reports the final position of the robot.
 
 A robot position consists of a grid coordinate (a pair of integers: x-coordinate followed by y-coordinate) and an orientation (N, S, E, W for north, south, east, and west). A robot instruction is a string of the letters “L”, “R”, and “F” which represent, respectively, the instructions:
