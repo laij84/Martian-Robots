@@ -24,22 +24,11 @@ const prompts = {
 rl.setPrompt(prompts.getGrid);
 rl.prompt();
 
-/**
- * function to handle inputs for creating robot and grid
- * @param  {string}
- * @return {array}
- */
-function parseInput(input) {
-    return [...input].filter(function(str) {
-        return /\S/.test(str);
-    });
-}
-
 rl.on('line', (input) => {
     switch(true) {
         case !grid:
             // parse string and remove whitespaces        
-            let sizes = parseInput(input);
+            let sizes = input.split(' ');
 
             try {
                 //Create grid with input
@@ -56,7 +45,7 @@ rl.on('line', (input) => {
             break;
 
         case !robot:
-            let robotInfo = parseInput(input);
+            let robotInfo = input.split(' ');
 
             try {
                 //Create grid with input
