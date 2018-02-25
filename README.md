@@ -1,6 +1,6 @@
-#Martian-Robots
+# Martian-Robots
 
-##Installation
+## Installation
 To setup this application, clone the repository and run:
 
 ```
@@ -25,15 +25,15 @@ or to run a specific test file:
 jasmine spec/[filename]
 ```
 
-##The Solution
-###About
+## The Solution
+### About
 I used an object oriented programming approach to solve this challenge, using ES6 JavaScript Classes to construct instances of the grid and robots. 
 
 I also used a class to store the command logic, I felt this should be separate from the Robot class to allow new commands to be added which could then be used on all instances of Robot. 
 
 The command class also only contains static methods - I did not think it was necessary to construct multiple instances of Command to control the robots. 
 
-###Improvements / Next Steps
+### Improvements / Next Steps
 Overall I think I reached most of the criteria outlined by the challenge. The only thing I would add is better validation for the processing commands logic on the Robot. 
 
 Currently when instructing a robot to move the method only checks for the valid commands (R L F), but if new commands were added then this would not work. 
@@ -42,7 +42,7 @@ I would approach this solution by iterating over the properties of the class to 
 
 
 
-##Problem: Martian Robots 
+## Problem: Martian Robots 
 ### The Problem 
 The surface of Mars can be modelled by a rectangular grid around which robots are able to move according to instructions provided from Earth. You are to write a program that determines each sequence of robot positions and reports the final position of the robot.
 
