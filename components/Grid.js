@@ -17,6 +17,7 @@
              default:
                  this.x = x;
                  this.y = y;
+                 this.scents = [];
          }
      }
  }

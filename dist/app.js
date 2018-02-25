@@ -89,6 +89,7 @@ var Grid = function Grid(x, y) {
         default:
             this.x = x;
             this.y = y;
+            this.scents = [];
     }
 };
 
@@ -314,22 +315,40 @@ var Robot = function () {
     }, {
         key: 'processCommands',
         value: function processCommands(commands) {
+            var _this = this;
+
             //spread into array
             var commandsArray = [].concat(_toConsumableArray(commands.toUpperCase()));
-            console.log(commandsArray);
-            //Loop over arrays
+
+            //Loop over array of commands
             for (var i = 0; i < commandsArray.length; i++) {
 
                 if (!this.lost) {
                     // store the last known position
                     this.prevLocation = [this.x, this.y, this.orientation];
 
+                    // Check grid for scents before executing command
+                    this.grid.scents.forEach(function (scent) {
+                        if (_this.x === scent.x && _this.y === scent.y && _this.orientation === scent.orientation && commandsArray[i] === scent.command) {
+                            throw new Error('There is a scent telling the robot not to go there.');
+                        }
+                    });
+
+                    // Execute command
                     Command[commandsArray[i]](this);
                 }
 
                 // after moving, check if robot is lost, and update state, report last known position
                 if (this.isLost()) {
                     this.lost = true;
+
+                    // Push last known position and command which caused robot to get lost into scents array.§  
+                    this.grid.scents.push({
+                        x: this.prevLocation[0],
+                        y: this.prevLocation[1],
+                        orientation: this.prevLocation[2],
+                        command: commandsArray[i]
+                    });
                     return this.prevLocation[0] + ' ' + this.prevLocation[1] + ' ' + this.prevLocation[2] + ' LOST';
                 }
             }

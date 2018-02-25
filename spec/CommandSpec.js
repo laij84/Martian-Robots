@@ -1,4 +1,4 @@
-describe('Commands robot', () => {
+describe('The Command Class', () => {
     const Robot = require('../components/Robot');
     const Grid = require('../components/Grid');
     const Command = require('../components/Command');
