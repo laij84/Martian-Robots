@@ -51,6 +51,19 @@ class Robot {
         //spread into array
         const commandsArray = [...commands.toUpperCase()];
 
+        /**
+         * function to check each item in the array
+         * @param  {array item}
+         * @return {boolean}
+         */
+        function validateArray(item) {
+            return item === 'R' || item === "L" || item === "F";
+        }
+
+        if(!(commandsArray.every(validateArray))) {
+            throw new Error('Invalid commands');
+        }
+
         //Loop over array of commands
         for (var i = 0; i < commandsArray.length; i++) {
 

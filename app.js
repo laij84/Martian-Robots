@@ -1,24 +1,106 @@
 const Grid = require('./components/Grid');
 const Robot = require('./components/Robot');
 const Command = require('./components/Command');
+const readline = require('readline');
 
-window.Grid = Grid;
-window.Robot = Robot;
-window.Command = Command;
-// Requirements
+let grid;
+let robot;
+let commands;
 
-//  1. user can create Grid
-//  2. max grid size is 50 by 50
-//  3. user provides x (width) and y(height) values
-//  4. robots that fall off grid leave scent to prevent other robots from falling off
-//  5. robot can turn Right or Left which changes orientation (NESW)
-//  6. robot can move Forward which changes its X Y position, 1 space at a time.
-//  7. users can provide a string of commands, max 100.
-//  8. after robot processes commands, it reports its new X / Y position
-//  9. if robot falls of grid, it returns its last known position + LOST
-// 10. User interface allows user to enter:
-//      - Grid Size (e.g. 5, 3)
-//      - Place robot on grid (e.g. 1 1 E)
-//      - String of commands(e.g. RFRFRFRF)
+
+const rl = readline.createInterface({
+  input: process.stdin,
+  output: process.stdout
+});
+
+const prompts = {
+    getGrid: "Enter the width and height (e.g. '5 3') of the grid: \n",
+    getRobot: "Enter the position(x y coords) and orientation (N S E W) of the robot (e.g. 1 1 E): \n",
+    getCommands: "Enter a string of commands ('R' right, 'L' left, 'F' forward) to move the robot (e.g. 'RFRFRFRF'): \n",
+    addRobot: 'Do you want to move another robot? (y/n)'
+}
+
+// Activate starting question
+rl.setPrompt(prompts.getGrid);
+rl.prompt();
+
+/**
+ * function to handle inputs for creating robot and grid
+ * @param  {string}
+ * @return {array}
+ */
+function parseInput(input) {
+    return [...input].filter(function(str) {
+        return /\S/.test(str);
+    });
+}
+
+rl.on('line', (input) => {
+    switch(true) {
+        case !grid:
+            // parse string and remove whitespaces        
+            let sizes = parseInput(input);
+
+            try {
+                //Create grid with input
+                grid = new Grid(parseInt(sizes[0]), parseInt(sizes[1]));
+                // set next question
+                rl.setPrompt(prompts.getRobot);
+                rl.prompt();
+            }
+            catch(error) {
+                console.log(error.message);
+                //Prompt again if error
+                rl.prompt();
+            }
+            break;
+
+        case !robot:
+            let robotInfo = parseInput(input);
+
+            try {
+                //Create grid with input
+                robot = new Robot(parseInt(robotInfo[0]), parseInt(robotInfo[1]), robotInfo[2], grid);
+
+                //Set next question
+                rl.setPrompt(prompts.getCommands);
+                rl.prompt();
+            }
+            catch(error) {
+                console.log(error.message);
+                rl.prompt();
+            }
+            break;
+        case !commands:
+            try {
+                let result = robot.processCommands(input);
+                console.log(result);
+                commands = input;
+                rl.setPrompt(prompts.addRobot);
+                rl.prompt();
+            }
+            catch(error) {
+                console.log(error.message);
+                rl.prompt();
+            }
+            break;
+        default:
+            if(input === 'y') {
+                // reset robot and commands, use same grid
+                robot = null;
+                commands = null;
+                rl.setPrompt(prompts.getRobot);
+                rl.prompt();
+            }
+            else if (input === 'n') {
+                // exit
+                rl.close();
+            }
+            else {
+                console.log("Invalid input.");
+                rl.prompt();
+            }
+    }
+});
 
 
