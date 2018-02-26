@@ -59,9 +59,14 @@ class Robot {
         function validateArray(item) {
             return item === 'R' || item === "L" || item === "F";
         }
-
-        if(!(commandsArray.every(validateArray))) {
-            throw new Error('Invalid commands');
+        
+        switch(true) {
+            case !(commandsArray.every(validateArray)):
+                throw new Error("Invalid commands. Please enter a string containing 'R', 'L', or 'F'.");
+                break;
+            case commandsArray.length > 100:
+                throw new Error("Command string exceeds the limit of 100.");
+                break;
         }
 
         //Loop over array of commands
